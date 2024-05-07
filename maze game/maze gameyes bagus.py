@@ -542,8 +542,16 @@ def maze4():
     blkrect(180,480,200,540,win)#h
     blkrect(0,520,180,540,win)#i
     blkrect(60,400,100,420,win)#j
-    blkrect(180,80,200,180,win)
+    blkrect(180,80,200,140,win)
     blkrect(240,140,260,220,win)
+    blkrect(300,60,320,240,win)
+    blkrect(300,280,360,300,win)
+    blkrect(360,240,380,300,win)
+    blkrect(320,180,420,200,win)
+    blkrect(420,180,440,340,win)
+    blkrect(300,300,320,460,win)
+    blkrect(360,340,380,400,win)
+    blkrect(380,380,440,400,win)
     #ouchie squares
     ouchie1 = Rectangle(Point(60,420),Point(100,460))
     ouchie1.setFill('maroon')
@@ -551,7 +559,7 @@ def maze4():
     ouchie2 = Rectangle(Point(20,500),Point(60,520))
     ouchie2.setFill('maroon')
     ouchie2.draw(win)
-    ouchie3 = Rectangle(Point(200,100),Point(260,120))
+    ouchie3 = Rectangle(Point(200,80),Point(260,100))
     ouchie3.setFill('maroon')
     ouchie3.draw(win)
     #yellow button
@@ -601,6 +609,7 @@ def maze4():
     ydoorcoord = [120,400,160,420]
     ouchiee1 = [60,420,100,460]
     ouchiee2 = [20,500,60,520]
+    ouchiee3 = [200,80,260,100]
     ybuttoncoord = [140,480,180,520]
     redbuttoncoord = [20,540,60,580]
     
@@ -618,7 +627,7 @@ def maze4():
             playerpoint[1] = playerpoint[1] - 20
             if ifcolide(list_obstacles,playerpoint[0],playerpoint[1]) == True:
                 playerpoint[1] = playerpoint[1] + 10
-                player.move(0, -10)  # Move upws
+                player.move(0, -10)  # Move up
             else:
                 playerpoint[1] = playerpoint[1] + 20
         elif key == "a" or key == "Left":
@@ -646,7 +655,7 @@ def maze4():
             break  # Quit the program if '/' is pressed
         elif ifin(end_space,playerpoint[0],playerpoint[1]) == True:
             break # Quit true loop (the same thing as above)
-        elif ifin(ouchiee1,playerpoint[0],playerpoint[1]) == True or ifin(ouchiee2,playerpoint[0],playerpoint[1]) == True:
+        elif ifin(ouchiee1,playerpoint[0],playerpoint[1]) == True or ifin(ouchiee2,playerpoint[0],playerpoint[1]) == True or ifin(ouchiee3,playerpoint[0],playerpoint[1]) == True:
             yes = False
             break
         elif ifin(ybuttoncoord,playerpoint[0],playerpoint[1]) == True and yelbuttonpressed == False:
