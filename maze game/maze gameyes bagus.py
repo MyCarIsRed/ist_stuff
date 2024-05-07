@@ -3,6 +3,9 @@ from graphics import *
 #hi
 def main():
 
+# This is micah's very cool game
+
+
 # IDE: Integrated Development Environment - In our case this is IDLE.
 # Note the indentation. In python this is VERY important.
     
