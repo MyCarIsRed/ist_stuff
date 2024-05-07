@@ -2,7 +2,6 @@ import random
 from graphics import *
 
 def main():
-# This is micah's cool game
 
 # IDE: Integrated Development Environment - In our case this is IDLE.
 # Note the indentation. In python this is VERY important.
@@ -500,7 +499,7 @@ def maze4():
     start.setFill('light green')
     start.draw(win)
 
-    end = Rectangle(Point(1140,540),Point(1180,580))
+    end = Rectangle(Point(640,540),Point(680,580))
     end.setFill('red')
     end.draw(win)
     #ALL WALLS ARE 20 LONG AND ALL PATHWAYS ARE 40 LONG
@@ -514,24 +513,34 @@ def maze4():
     blkrect(60,180,80,300,win)#leftvertlower
     blkrect(80,60,260,80,win)#topdend
     blkrect(120,120,140,240,win)#2nd vert middle part right of door
-    #door
+    #red door
     reddoor = Rectangle(Point(80,120),Point(120,140))
     reddoor.setFill('red')                  
     reddoor.draw(win)
-    blkrect(87,127,113,133,win)
+    reddoormid = Rectangle(Point(87,127),Point(113,133))
+    reddoormid.setFill('black')
+    reddoormid.draw(win)
+    #red button
+    redbutt = Rectangle(Point(20,540),Point(60,580))
+    redbutt.setFill('red')
+    redbutt.draw(win)
+    redbuttmid = Rectangle(Point(30,550),Point(50,570))
+    redbuttmid.setFill('black')
+    redbuttmid.draw(win)
     #
     blkrect(120,280,200,300,win)#middle wall
-    blkrect(140,220,260,240,win)
-    blkrect(240,220,260,600,win)
-    blkrect(20,340,200,360,win)
-    # yellow dissapearing doors that are cool and yay
-    blkrect(120,240,140,300,win)
-    blkrect(160,400,260,420,win)
-    blkrect(100,400,120,460,win)
-    blkrect(100,460,200,480,win)
-    blkrect(180,480,200,540,win)
-    blkrect(0,520,180,540,win)
-    blkrect(60,400,100,420,win)
+    blkrect(140,220,260,240,win)#a
+    blkrect(240,220,260,600,win)#b
+    blkrect(20,340,200,360,win)#c
+    blkrect(120,240,140,300,win)#d
+    blkrect(160,400,260,420,win)#e
+    blkrect(100,400,120,460,win)#f
+    blkrect(100,460,200,480,win)#g
+    blkrect(180,480,200,540,win)#h
+    blkrect(0,520,180,540,win)#i
+    blkrect(60,400,100,420,win)#j
+    blkrect(180,80,200,180,win)
+    blkrect(240,140,260,220,win)
     #ouchie squares
     ouchie1 = Rectangle(Point(60,420),Point(100,460))
     ouchie1.setFill('maroon')
@@ -539,39 +548,74 @@ def maze4():
     ouchie2 = Rectangle(Point(20,500),Point(60,520))
     ouchie2.setFill('maroon')
     ouchie2.draw(win)
+    ouchie3 = Rectangle(Point(200,100),Point(260,120))
+    ouchie3.setFill('maroon')
+    ouchie3.draw(win)
+    #yellow button
+    ybutton = Rectangle(Point(140,480),Point(180,520))
+    ybutton.setFill('yellow')
+    ybutton.draw(win)
+    ymidbutt = Rectangle(Point(150,490),Point(170,510))
+    ymidbutt.setFill('black')
+    ymidbutt.draw(win)
+    #yellow door
+    ydoor = Rectangle(Point(120,400),Point(160,420))
+    ydoor.setFill('yellow')
+    ydoor.draw(win)
+    ydoormid = Rectangle(Point(127,407),Point(153,413))
+    ydoormid.setFill('black')
+    ydoormid.draw(win)
+    
+    
+    
+    
+
+
     
     yes = True
-    player = Circle(Point(40,40), 15)
+    player = Circle(Point(40,40), 12)
     player.setFill("blue")
     player.draw(win)
     playerpoint = [40,40]
-    end_space = [1140,540,1180,580]
-    list_obstacles = {'ab':[0,0,700,20],'bb':[0,0,20,600],'cb':[1180,0,700,600],
-                'db':[680,0,700,600]},'leftvertupper':[60,20,80,300],
-                'leftvertlower':[60,180,80,300],'topdend':[80,60,260,80],
-                '2nd vermidparighdor':[120,120,140,240]
-                
-    buttonpressed = False
+    end_space = [640,540,680,580]
+    list_obstacles = {'reddoor':[80,120,120,140],'ydoor':[120,400,160,420],'ab':[0,0,700,20],
+                      'bb':[0,0,20,600],
+                      'cb':[0,580,700,600,],
+                      'db':[680,0,700,600],'leftvertupper':[60,20,80,140],
+                      'leftvertlower':[60,180,80,300],'topdend':[80,60,260,80],
+                      '2nd vermidparighdor':[120,120,140,240], 'middlewall':[120,280,200,300],
+                      'a':[140,220,260,240],'b':[240,220,260,600],'c':[20,340,200,360],
+                      'd':[120,240,140,300],'e':[160,400,260,420],'f':[100,400,120,460],
+                      'g':[100,460,200,480],'h':[180,480,200,540],'i':[0,520,180,540],
+                      'j':[60,400,100,420]}
+               
+    redbuttonpressed = False
     reddoorexist = True
-    reddoor = [80,120,120,140]
+    yelbuttonpressed = False
+    yeldoorexist = True
+    
+    reddoorcoord = [80,120,120,140]
+    ydoorcoord = [120,400,160,420]
     ouchiee1 = [60,420,100,460]
     ouchiee2 = [20,500,60,520]
+    ybuttoncoord = [140,480,180,520]
+    redbuttoncoord = [20,540,60,580]
+    
     
 
     
     
     while True:
         key = win.checkKey()
-        if reddoorexist == True:
-            list_obstacles['reddoor'] = reddoor
-        elif reddoorexist == False:
-            list_obstacles.pop('reddoor')
-            reddoor.undraw()
+        #check red door
+        
+
+        
         if key == "w" or key == "Up":
             playerpoint[1] = playerpoint[1] - 20
             if ifcolide(list_obstacles,playerpoint[0],playerpoint[1]) == True:
                 playerpoint[1] = playerpoint[1] + 10
-                player.move(0, -10)  # Move up
+                player.move(0, -10)  # Move upws
             else:
                 playerpoint[1] = playerpoint[1] + 20
         elif key == "a" or key == "Left":
@@ -602,6 +646,30 @@ def maze4():
         elif ifin(ouchiee1,playerpoint[0],playerpoint[1]) == True or ifin(ouchiee2,playerpoint[0],playerpoint[1]) == True:
             yes = False
             break
+        elif ifin(ybuttoncoord,playerpoint[0],playerpoint[1]) == True and yelbuttonpressed == False:
+            ymidbutt.undraw()
+            ymidbutt.setFill('white')
+            ymidbutt.draw(win)
+            yelbuttonpressed = True
+            yeldoorexist = False
+            ydoor.undraw()
+            ydoormid.undraw()
+            player.undraw()
+            player.draw(win)
+            list_obstacles.pop('ydoor')
+        elif ifin(redbuttoncoord,playerpoint[0],playerpoint[1]) == True and redbuttonpressed == False:
+            redbuttmid.undraw()
+            redbuttmid.setFill('white')
+            redbuttmid.draw(win)
+            reddoor.undraw()
+            reddoormid.undraw()
+            redbuttonpressed = True
+            reddoorexist = False
+            player.undraw()
+            player.draw(win)
+            list_obstacles.pop('reddoor')
+        
+            
         
         
 
