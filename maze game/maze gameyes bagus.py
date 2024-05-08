@@ -542,7 +542,7 @@ def maze4():
     blkrect(180,480,200,540,win)#h
     blkrect(0,520,180,540,win)#i
     blkrect(60,400,100,420,win)#j
-    blkrect(180,80,200,140,win)
+    blkrect(180,80,200,180,win)
     blkrect(240,140,260,220,win)
     blkrect(300,60,320,240,win)
     blkrect(300,280,360,300,win)
@@ -552,6 +552,21 @@ def maze4():
     blkrect(300,300,320,460,win)
     blkrect(360,340,380,400,win)
     blkrect(380,380,440,400,win)
+    blkrect(320,440,380,460,win)
+    blkrect(420,400,440,460,win)
+    blkrect(380,500,500,520,win)
+    blkrect(320,460,340,600,win)
+    blkrect(480,520,500,540,win)
+    blkrect(540,500,560,580,win)
+    blkrect(480,440,500,500,win)
+    blkrect(480,440,640,460,win)
+    blkrect(440,380,540,400,win)
+    blkrect(480,280,500,340,win)
+    blkrect(440,260,500,280,win)
+    blkrect(580,320,600,460,win)
+    
+    
+    
     #ouchie squares
     ouchie1 = Rectangle(Point(60,420),Point(100,460))
     ouchie1.setFill('maroon')
@@ -562,6 +577,25 @@ def maze4():
     ouchie3 = Rectangle(Point(200,80),Point(260,100))
     ouchie3.setFill('maroon')
     ouchie3.draw(win)
+    #right side ouchies
+    ouchie4 = Rectangle(Point(260,500),Point(280,540))
+    ouchie4.setFill('maroon')
+    ouchie4.draw(win)
+    ouchie5 = Rectangle(Point(340,560),Point(400,580))
+    ouchie5.setFill('maroon')
+    ouchie5.draw(win)
+    ouchie6 = Rectangle(Point(440,520),Point(480,540))
+    ouchie6.setFill('maroon')
+    ouchie6.draw(win)
+    ouchie7 = Rectangle(Point(620,460),Point(640,540))
+    ouchie7.setFill('maroon')
+    ouchie7.draw(win)
+    ouchie8 = Rectangle(Point(560,500),Point(580,580))
+    ouchie8.setFill('maroon')
+    ouchie8.draw(win)
+    ouchie9 = Rectangle(Point(640,520),Point(680,540))
+    ouchie9.setFill('maroon')
+    ouchie9.draw(win)
     #yellow button
     ybutton = Rectangle(Point(140,480),Point(180,520))
     ybutton.setFill('yellow')
@@ -584,6 +618,7 @@ def maze4():
 
     
     yes = True
+    no = True
     player = Circle(Point(40,40), 12)
     player.setFill("blue")
     player.draw(win)
@@ -612,6 +647,10 @@ def maze4():
     ouchiee3 = [200,80,260,100]
     ybuttoncoord = [140,480,180,520]
     redbuttoncoord = [20,540,60,580]
+    ouchielist = {'1':[60,420,100,460],'2':[20,500,60,520],
+                  '3':[200,80,260,100],'4':[260,500,280,540],'5':[340,560,400,580],
+                  '6':[440,520,480,540],'7':[620,460,640,540],'8':[560,500,580,580],
+                  '9':[640,520,680,540]}
     
     
 
@@ -619,10 +658,7 @@ def maze4():
     
     while True:
         key = win.checkKey()
-        #check red door
-        
-
-        
+               
         if key == "w" or key == "Up":
             playerpoint[1] = playerpoint[1] - 20
             if ifcolide(list_obstacles,playerpoint[0],playerpoint[1]) == True:
@@ -655,9 +691,6 @@ def maze4():
             break  # Quit the program if '/' is pressed
         elif ifin(end_space,playerpoint[0],playerpoint[1]) == True:
             break # Quit true loop (the same thing as above)
-        elif ifin(ouchiee1,playerpoint[0],playerpoint[1]) == True or ifin(ouchiee2,playerpoint[0],playerpoint[1]) == True or ifin(ouchiee3,playerpoint[0],playerpoint[1]) == True:
-            yes = False
-            break
         elif ifin(ybuttoncoord,playerpoint[0],playerpoint[1]) == True and yelbuttonpressed == False:
             ymidbutt.undraw()
             ymidbutt.setFill('white')
@@ -680,6 +713,13 @@ def maze4():
             player.undraw()
             player.draw(win)
             list_obstacles.pop('reddoor')
+        elif yes == True:
+            for i in ouchielist:
+                if ifin(ouchielist[i],playerpoint[0],playerpoint[1]) == True:
+                    no = False
+            if no == False:
+                yes = False
+                break
         
             
         
