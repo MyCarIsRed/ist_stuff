@@ -3,7 +3,6 @@ from graphics import *
 
 
 def main():
-    
 
 # IDE: Integrated Development Environment - In our case this is IDLE.
 # Note the indentation. In python this is VERY important.
@@ -30,7 +29,7 @@ def ifskip():
     win.getMouse() # pause for click in window 
     win.close()
 def begin():
-    win = GraphWin("LAB ESCAPE", 1000, 700)
+    win = GraphWin("LAB ESCAPE", 1000, 1000)
 
     tImage = Image(Point(500,500), "New_Back.png")
     tImage.draw(win)
@@ -61,21 +60,20 @@ def begin():
             break
 
 def levels():
-    win = GraphWin("Level Selector", 1000, 700)
+    win = GraphWin("Level Selector", 1000, 1000)
 
     tImage = Image(Point(500,500), "New_Back.png")
     tImage.draw(win)
     # Title Screen
-    title = Text(Point(500, 150), "Level Selector")
+    title = Text(Point(500, 200), "Level Selector")
     title.setTextColor("yellow")
     title.setSize(36)
     title.draw(win)
     
-    lv1 = create_button(win, Point(500, 300), 200, 50, "Level 1")  
-    lv2 = create_button(win, Point(500, 400), 200, 50, "Level 2")  
-    lv3 = create_button(win, Point(500, 500), 200, 50, "Level 3")  
-    lv4 = create_button(win, Point(500, 600), 200, 50, "Level 4")
-    blkrect(420,595,580,605,win)
+    lv1 = create_button(win, Point(500, 400), 200, 50, "Level 1")  
+    lv2 = create_button(win, Point(500, 500), 200, 50, "Level 2")  
+    lv3 = create_button(win, Point(500, 600), 200, 50, "Level 3")  
+    lv4 = create_button(win, Point(500, 700), 200, 50, "Level 4")  
 
     # Wait for a mouse click
     while True:
@@ -83,21 +81,15 @@ def levels():
         if lv1.getP1().getX() <= click_point.getX() <= lv1.getP2().getX() and lv1.getP1().getY() <= click_point.getY() <= lv1.getP2().getY():
             win.close()
             maze1()
-            congrats1() 
-            begin()
         elif lv2.getP1().getX() <= click_point.getX() <= lv2.getP2().getX() and lv2.getP1().getY() <= click_point.getY() <= lv2.getP2().getY():
             win.close()
             maze2()
-            congrats2() 
-            begin()
         elif lv3.getP1().getX() <= click_point.getX() <= lv3.getP2().getX() and lv3.getP1().getY() <= click_point.getY() <= lv3.getP2().getY():
             win.close()
             maze3()
-            congrats3() 
-            begin()
         elif lv4.getP1().getX() <= click_point.getX() <= lv4.getP2().getX() and lv4.getP1().getY() <= click_point.getY() <= lv4.getP2().getY():
             win.close()
-            break
+            maze4()
 
 def movement():
     win = GraphWin('Instruction', 1000, 1000)
@@ -117,41 +109,31 @@ def kidnap():
     win.close()
 def maze1():
     # Text to indicate the start
-    win = GraphWin('Maze 1', 500, 500)
-    start = Rectangle(Point(50,500), Point(0, 450))
+    win = GraphWin('Maze 1', 1000, 1000)
+    start = Rectangle(Point(15,985), Point(65, 935))
     start.setFill("Light Green")
     start.draw(win)
     # Text to indicate the end
-    end = Rectangle(Point(450,0), Point(500, 50))
+    end = Rectangle(Point(985,15), Point(935, 65))
     end.setFill("Red")
     end.draw(win)
-    # First vertical line. Note, you can call the variables anything you want - except reserved words.
-    vert1 = Rectangle(Point(0,0), Point(35,450))
-    vert1.setFill('black')
-    vert1.draw(win)
-    
-    w = Rectangle(Point(0,0), Point(450, 25))
-    w.setFill('black')
-    w.draw(win)
-    
-    vert = Rectangle(Point(25,400), Point(350, 450))
-    vert.setFill('black')
-    vert.draw(win)
-    
-    ww = Rectangle(Point(150,150), Point(500, 250))
-    ww.setFill('black')
-    ww.draw(win)
-    
-    wwa = Rectangle(Point(0,20), Point(450, 100))
-    wwa.setFill('black')
-    wwa.draw(win)
+    # function that draws black lines
+    blkrect(0,0,15,1000,win)
+    blkrect(0,0,1000,15,win)
+    blkrect(0,1000,1000,985,win)
+    blkrect(1000,0,985,1000,win)
+    blkrect(300,0,315,800,win)
+    blkrect(600,200,615,1000,win)
+    blkrect(850,0,865,600,win)
+
     # Player model
-    player = Image(Point(25, 475), "BlockDown.png")
+    player = Image(Point(40,960), "BlockUp.png")
     player.draw(win)
+    
     # Movement functions
-    list_obstacles = {'a':[0,0,35,450],'b':[0,0,450,25],'c':[25,400,350,450],'d':[150,150,500,250],'e':[0,20,450,100]}
-    end_space = [450,0,500,50]
-    playerpoint = [25,475]
+    list_obstacles = {'vert1':[0,0,15,1000],'vert2':[0,0,1000,15],'vert3':[0,985,1000,1000],'vert4':[985,0,1000,1000],'vert5':[300,0,315,800],'vert6':[600,200,615,1000],'vert7':[850,0,865,600]}
+    end_space = [935,15,985,65]
+    playerpoint = [40, 960]
     while True:
         key = win.checkKey()
 
@@ -249,6 +231,183 @@ def buttoninstructions():
     win.close()
 
 def maze2():
+    win = GraphWin(('Maze 2'),1000,1000)#window
+    #start
+    start = Rectangle(Point(15,985), Point(65, 935))
+    start.setFill("Light Green")
+    start.draw(win)
+    #end
+    end = Rectangle(Point(985,15), Point(935, 65))
+    end.setFill("Red")
+    end.draw(win)
+
+    # First vertical line. Note, you can call the variables anything you want - except reserved words.
+    blkrect(0,0,15,1000,win)#1
+    blkrect(0,985,1000,1000,win)#2
+    blkrect(985,0,1000,1000,win)#3
+    blkrect(0,0,1000,15,win)#4
+    blkrect(920,0,935,900,win)#5
+    blkrect(65,60,80,1000,win)#6
+    blkrect(80,60,850,75,win)#7
+    blkrect(80,400,500,415,win)#8
+    blkrect(920,400,550,415,win)#9
+    blkrect(485,125,500,415,win)#10
+    blkrect(300,125,485,140,win)#11
+    blkrect(70,125,250,140,win)#12
+    blkrect(235,140,250,350,win)# 13
+    blkrect(300,140,315,350,win)# 14
+    blkrect(300,350,400,365,win)# 15
+    blkrect(385,200,400,365,win)# 16
+    blkrect(130,885,920,900,win)# 17
+    blkrect(70,800,870,815,win)# 18
+    blkrect(130,500,145,815,win)# 19
+    blkrect(130,485,250,500,win)# 20
+    blkrect(250,485,265,700,win)# 21
+    blkrect(320,485,930,500,win)# 22
+    blkrect(320,485,335,700,win)# 23
+    blkrect(320,685,850,700,win)# 24
+    blkrect(835,550,850,700,win)# 25
+    blkrect(550,550,835,565,win)# 26
+
+
+    #_______button_____
+    buttoncolour = Rectangle(Point(80, 140), Point(130, 190))
+    buttoncolour.setFill('red')
+    buttoncolour.draw(win)
+    middlebutton = Circle(Point(105,165),(12))
+    middlebutton.setFill('black')
+    middlebutton.draw(win)
+
+    #__door___
+    doorr = Rectangle(Point(920, 900), Point(935, 985))
+    doorr.setFill('red')
+    doorr.draw(win)
+    #_________
+    doorbit = Rectangle(Point(925,910), Point(930,975))#|door bit
+    doorbit.setFill('black')
+    doorbit.draw(win)
+    
+    player = Image(Point(40,965), "BlockRight.png")
+    player.draw(win)
+
+    playerpoint = [40,965]
+    listobby = {'1':[0,0,15,1000],'2':[0,985,1000,1000],'3':[985,0,1000,1000],'4':[0,0,1000,15],'5':[920,0,935,900],'6':[65,60,80,1000],'7':[80,60,850,75],'8':[80,400,500,415],'9':[920,400,550,415],'10':[485,125,500,415],'11':[300,125,485,140],
+                '12':[70,125,250,140],'13':[235,140,250,350],'14':[300,140,315,350],'15':[300,350,400,365],'16':[385,200,400,365],'17':[130,885,920,900],'18':[70,800,870,815],'19':[130,500,145,815],'20':[130,485,250,500],'21':[250,485,265,700],
+                '22':[320,485,930,500],'23':[320,485,335,700],'24':[320,685,850,700],'25':[835,550,850,700],'26':[550,550,835,565]}
+    button = [80,140,130,190]
+    door = [920,900,935,985]
+    end_space = [935,15,985,65]
+    doorexist = True
+    buttonpressed = False
+
+    while True:
+        key = win.checkKey()
+        if key == "w" or key == "Up":
+            player.undraw()
+            player = Image(Point(playerpoint[0],playerpoint[1]), "BlockUp.png")
+            player.draw(win)
+            playerpoint[1] = playerpoint[1] - 20
+            if ifcolide(listobby,playerpoint[0],playerpoint[1]) == True:
+                if doorexist == True:
+                    if doorcolide(door,playerpoint[0],playerpoint[1]) == True:
+                        playerpoint[1] = playerpoint[1] + 10
+                        player.move(0, -10)  # Move up
+                    else:
+                        playerpoint[1] = playerpoint[1] + 20
+                else:
+                    playerpoint[1] = playerpoint[1] + 10
+                    player.move(0, -10)  # Move up
+            else:
+                playerpoint[1] = playerpoint[1] + 20
+        elif key == "a" or key == "Left":
+            player.undraw()
+            player = Image(Point(playerpoint[0],playerpoint[1]), "BlockLeft.png")
+            player.draw(win)
+            playerpoint[0] = playerpoint[0] - 20
+            if ifcolide(listobby,playerpoint[0],playerpoint[1]) == True:
+                if doorexist == True:
+                    if doorcolide(door,playerpoint[0],playerpoint[1]) == True:
+                        playerpoint[0] = playerpoint[0] + 10
+                        player.move(-10, 0)  # Move left
+                    else:
+                        playerpoint[0] = playerpoint[0] + 20
+                else:
+                    playerpoint[0] = playerpoint[0] + 10
+                    player.move(-10, 0)  # Move left
+            else:
+                playerpoint[0] = playerpoint[0] + 20
+        elif key == "s" or key == "Down":
+            player.undraw()
+            player = Image(Point(playerpoint[0],playerpoint[1]), "BlockDown.png")
+            player.draw(win)
+            playerpoint[1] = playerpoint[1] + 20
+            if ifcolide(listobby,playerpoint[0],playerpoint[1]) == True:
+                if doorexist == True:
+                    if doorcolide(door,playerpoint[0],playerpoint[1]) == True:
+                        playerpoint[1] = playerpoint[1] - 10
+                        player.move(0, 10)   # Move down
+                    else:
+                        playerpoint[1] = playerpoint[1] - 20
+                else:
+                    playerpoint[1] = playerpoint[1] - 10
+                    player.move(0, 10)   # Move down
+            else:
+                playerpoint[1] = playerpoint[1] - 20
+        elif key == "d" or key == "Right":
+            player.undraw()
+            player = Image(Point(playerpoint[0],playerpoint[1]), "BlockRight.png")
+            player.draw(win)
+            playerpoint[0] = playerpoint[0] + 20
+            if ifcolide(listobby,playerpoint[0],playerpoint[1]) == True:
+                if doorexist == True:
+                    if doorcolide(door,playerpoint[0],playerpoint[1]) == True:               
+                        playerpoint[0] = playerpoint[0] - 10
+                        player.move(10, 0)   # Move right
+                    else:
+                        playerpoint[0] = playerpoint[0] - 20
+                else:
+                    playerpoint[0] = playerpoint[0] - 10
+                    player.move(10, 0)   # Move right
+            else:
+                playerpoint[0] = playerpoint[0] - 20
+        elif key == "p":
+            win.close()
+            ifskip()
+            maze3()
+            break  # Quit the program if '/' is pressed
+        elif ifin(end_space,playerpoint[0],playerpoint[1]) == True:
+            win.close()
+            congrats2()
+            maze3()
+            break # Quit true loop (the same thing as above)
+            
+        elif buttonpressed == False:
+            if ifin(button,playerpoint[0],playerpoint[1]):
+                middlebutton.undraw()
+                middlebutton.setFill('Light Green')
+                middlebutton.draw(win)
+                doorr.undraw()
+                doorbit.undraw()
+                doorexist = False
+                buttonpressed = True
+
+def doorcolide(door,x,y):
+    if x >= door[0] and x <= door[2] and y >= door[1] and y <= door[3]:
+        return False
+    else:
+        return True
+
+
+
+def congrats2():
+    win = GraphWin('You Won', 1000, 1000)
+    line(500,800,20,"Click to continue",win)
+    line(500,200,35,"Congradulation",win)
+    line(500,400,25,"you completed maze 2",win)
+    win.getMouse() # pause for click in window
+    win.close()
+
+def maze3():
     win = GraphWin(('Maze 3'),500,500)#window
     #start
     start = Rectangle(Point(50,500), Point(0, 450))
@@ -383,13 +542,13 @@ def maze2():
             win.close()
             ifskip()
             fake_end()
-            maze3()
+            maze4()
             break  # Quit the program if '/' is pressed
         elif ifin(end_space,playerpoint[0],playerpoint[1]) == True:
             win.close()
-            congrats2()
+            congrats3()
             fake_end()
-            maze3()
+            maze4()
             break # Quit true loop (the same thing as above)
             
         elif buttonpressed == False:
@@ -402,19 +561,11 @@ def maze2():
                 doorexist = False
                 buttonpressed = True
 
-def doorcolide(door,x,y):
-    if x >= door[0] and x <= door[2] and y >= door[1] and y <= door[3]:
-        return False
-    else:
-        return True
-
-
-
-def congrats2():
+def congrats3():
     win = GraphWin('You Won', 1000, 1000)
     line(500,800,20,"Click to continue",win)
     line(500,200,35,"Congradulation",win)
-    line(500,400,25,"you completed maze 2",win)
+    line(500,400,25,"you completed maze 3",win)
     win.getMouse() # pause for click in window
     win.close()
 
@@ -432,83 +583,43 @@ def fake_end():
     win.getMouse() # pause for click in window
     win.close()
 
-def maze3():
-    win = GraphWin('Maze 2', 500, 500)
+def maze4():
+    win = GraphWin('Maze 4', 1000, 1000)
 
-    start = Rectangle(Point(10,500), Point(60, 450))
+    start = Rectangle(Point(20,1000), Point(120, 900))
     start.setFill("Light Green")
     start.draw(win)
-
-    tophoriz = Rectangle(Point(0,0), Point(500, 10))
-    tophoriz.setFill("black")
-    tophoriz.draw(win)
-
-    bothoriz = Rectangle(Point(60,490), Point(500, 500))
-    bothoriz.setFill("black")
-    bothoriz.draw(win)
-
-    lefvert = Rectangle(Point(0,0), Point(10, 500))
-    lefvert.setFill("black")
-    lefvert.draw(win)
-
-    rvert = Rectangle(Point(490, 0), Point(500, 500))
-    rvert.setFill("black")
-    rvert.draw(win)
-
-    lm = Rectangle(Point(60, 500), Point(70, 60))
-    lm.setFill("black")
-    lm.draw(win)
-
-    tm = Rectangle(Point(70, 60), Point(440, 70))
-    tm.setFill("black")
-    tm.draw(win)
-
-    rm = Rectangle(Point(440,70), Point(430, 440))
-    rm.setFill("Black")
-    rm.draw(win)
-
-    bm = Rectangle(Point(430, 440), Point(120, 430))
-    bm.setFill("Black")
-    bm.draw(win)
-
-    lmm = Rectangle(Point(120, 430), Point(130, 120))
-    lmm.setFill("Black")
-    lmm.draw(win)
-
-    tmm = Rectangle(Point(130, 120), Point(380, 130))
-    tmm.setFill("Black")
-    tmm.draw(win)
-
-    rmm = Rectangle(Point(380, 130), Point(370, 380))
-    rmm.setFill("Black")
-    rmm.draw(win)
-
-    bmm = Rectangle(Point(370, 380), Point(180, 370))
-    bmm.setFill("Black")
-    bmm.draw(win)
-
-    lastmid = Rectangle(Point(240, 240), Point(370, 260))
-    lastmid.setFill("Black")
-    lastmid.draw(win)
-
-    fake_end = Rectangle(Point(320, 190), Point(370, 240))
+    blkrect(0,0,1000,20,win)# 1
+    blkrect(120,980,1000,1000,win)# 2
+    blkrect(0,0,20,1000,win)# 3
+    blkrect(980,0,1000,1000,win)# 4
+    blkrect(120,1000,140,120,win)# 5
+    blkrect(140,120,880,140,win)# 6
+    blkrect(880,140,860,880,win)# 7
+    blkrect(860,880,240,860,win)# 8
+    blkrect(240,860,260,240,win)# 9
+    blkrect(260,240,760,260,win)# 10
+    blkrect(760,260,740,760,win)# 11
+    blkrect(740,760,360,740,win)# 12
+    blkrect(480,480,740,520,win)# 13
+    fake_end = Rectangle(Point(640, 520), Point(740, 620))
     fake_end.setFill("maroon")
     fake_end.draw(win)
 
-    end = Rectangle(Point(320, 260), Point(370, 310))
+    end = Rectangle(Point(640, 380), Point(740, 480))
     end.setFill("red")
     end.draw(win)
 
-    player = Image(Point(35, 475), "BlockDdddown")
+    player = Image(Point(70,950), "BlockUp.png")
     player.draw(win)
 
-    listobby = {'tophoriz':[0,0,500,10],'bothhoriz':[60,490,500,500],'lefvert':[0,0,10,500],'rvert':[490,0,500,500],
-                'lm':[60,60,70,500],'tm':[70,60,440,70],'rm':[430,70,440,440],'bm':[120,430,430,440],'lmm':[120,120,130,430],
-                'tmm':[130,120,380,130],'rmm':[370,130,380,380],'bmm':[180,370,370,380],
-                'lastmid':[240,240,370,260]}
-    end_space = [320,260,370,310]
-    fake_end = [320,190,370,240]
-    playerpoint = [35,475]
+    listobby = {'1':[0,0,1000,20],'2':[120,980,1000,1000],'3':[0,0,20,1000],'4':[980,0,1000,1000],
+                '5':[120,120,140,1000],'6':[140,120,880,140],'7':[860,140,880,880],'8':[240,860,860,880],'9':[240,240,260,860],
+                '10':[260,240,760,260],'11':[740,260,760,760],'12':[360,740,740,760],
+                '13':[480,480,740,520]}
+    end_space = [640,380,740,480]
+    fake_end = [640,520,740,620]
+    playerpoint = [70,950]
     # Movement functions
     hm = True
     while True:
@@ -559,7 +670,8 @@ def maze3():
             won()
             break  # Quit the program if '/' is pressed
         elif ifin(end_space,playerpoint[0],playerpoint[1]) == True:
-            congrats3()
+            win.close()
+            congrats4()
             won()
             break # Quit true loop (the same thing as above)
         elif ifin(fake_end,playerpoint[0],playerpoint[1]) == True:
@@ -572,11 +684,11 @@ def maze3():
         win.close()
         afterkidnap()
 
-def congrats3():
+def congrats4():
 
     win = GraphWin('You Won', 1000, 1000)
     line(500,200,30,"Congradulation",win)
-    line(500,400,20,"you completed maze 3",win)
+    line(500,400,20,"you completed maze 4",win)
     line(500,800,10,"Click to continue",win)
 
     win.getMouse() # pause for click in window 
@@ -584,8 +696,8 @@ def congrats3():
 
 def won():
     win = GraphWin('You Won', 1000, 1000)
-    line(500,200,30,"Conggradroolashun. \n Maze 4 coming up in the next patch :) :(",win)
-    line(500,400,20,"To be continured...",win)
+    line(500,200,30,"Congradulation",win)
+    line(500,400,20,"You have beaten the game,",win)
 
     win.getMouse() # pause for click in window 
     win.close()
